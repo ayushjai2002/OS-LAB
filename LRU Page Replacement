@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int fault(int pages[],int n,int memcapacity){
+    int pagefault =0;
+  vector<int>v;
+  for(int i=0;i<=n;i++){
+      auto it=find(v.begin(),v.end(),pages[i]);
+      if(it==v.end()){
+          if(v.size()==memcapacity){
+              v.erase(v.begin());
+          }
+          v.push_back(pages[i]);
+          pagefault++;
+      }
+      else{
+          v.erase(it);
+          v.push_back(pages[i]);
+      }
+  }
+  return pagefault;
+}
+int main(){
+    int n;
+    cin>>n;
+    int pages[n];
+    for(int i=0;i<n;i++){
+        cin>>pages[i];
+    }
+    int memcapacity;
+    cin>>memcapacity;
+    cout<<fault(pages,n,memcapacity);
+}
